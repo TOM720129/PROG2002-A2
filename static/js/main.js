@@ -29,15 +29,15 @@ function insertEventCard(event) {
   card.classList.add('event-card');
   // insert html
   card.innerHTML = `
-        <img src="${event.image_url}" alt="${event.name}" />
-        <div class="event-card-content">
-          <h3>${event.name}</h3>
-          <p><strong>Category:</strong> ${event.category_name}</p>
-          <p><strong>Location:</strong> ${event.city}, ${event.state_region}</p>
-          <p><strong>Date:</strong> ${new Date(event.start_at).toLocaleString()}</p>
-          <a href="event.html?id=${event.id}" class="btn">View Details</a>
-        </div>
-      `;
+      <img src="${event.image_url}" alt="${event.name}" />
+      <div class="event-card-content">
+        <h3>${event.name}</h3>
+        <p><strong>Category:</strong> ${event.category_name}</p>
+        <p><strong>Location:</strong> ${event.city}, ${event.state_region}</p>
+        <p><strong>Date:</strong> ${new Date(event.start_at).toLocaleString()}</p>
+        <a href="event.html?id=${event.id}" class="btn">View Details</a>
+      </div>
+    `;
   // append to container
   container.appendChild(card);
 }

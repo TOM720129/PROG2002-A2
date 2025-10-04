@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- external css -->
+    <title>Kindness Connect</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!-- Navigation -->
+<nav>
+    <div class="logo">Kindness Connect</div>
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="search.html">Search Events</a></li>
+        <li><a href="#">About</a></li>
+    </ul>
+</nav>
+
+<!-- Header -->
+<header class="header">
+    <h1>Find Events Near You</h1>
+    <p>Search events by date, city, or category and get involved in meaningful activities.</p>
+</header>
+
+<main>
+    <!-- Search Form -->
+    <section class="search-section">
+        <form id="search-form" class="search-form">
+            <input type="date" id="date" name="date">
+            <input type="text" id="city" name="city" placeholder="City">
+            <select id="category" name="category">
+                <option value="">All Categories</option>
+            </select>
+            <button type="submit" class="btn">Search</button>
+            <button type="button" id="clear-btn" class="btn btn-clear">Clear Filters</button>
+        </form>
+
+        <div id="search-results" class="event-grid">
+
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2025 Kindness Connect | Made with 冯楷成(24516510)️</p>
+</footer>
+
+<!-- external script -->
+<script src="js/search.js"></script>
+</body>
+</html>
