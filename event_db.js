@@ -2,7 +2,10 @@
 const mysql = require('mysql2');
 const config = require('./db-config');
 
-// Create the connection to database
-const connection = mysql.createConnection(config);
+// create connect pool
+const pool = mysql.createPool(config);
 
-module.exports = connection
+// use promise
+const promisePool = pool.promise();
+
+module.exports = promisePool;
