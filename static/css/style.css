@@ -162,3 +162,30 @@ footer {
     background: #0066cc;
 }
 
+.event-details-card {
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+.event-details-card img {
+    height: 300px;
+    object-fit: cover;
+}
+
+.progress-bar {
+    width: 100%;
+    background: #eee;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 20px;
+    margin: 0.5rem 0;
+}
+
+.progress {
+    height: 100%;
+    background: #004080;
+    width: 0%;
+    transition: width 0.5s;
+    border-radius: 10px 0 0 10px;
+}
+
