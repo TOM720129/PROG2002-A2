@@ -7,7 +7,13 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   try {
     // query all event from db
-    const [rows] = await db.query('SELECT * FROM events');
+    const [rows] = await db.query(
+      `SELECT e.*, c.name AS category_name,
+       FROM events e
+       JOIN categories c ON e.category_id = c.id
+       WHERE e.is_suspended = 0
+       ORDER BY e.start_at ASC`
+    );
     // response events with json format
     res.json(rows);
   } catch (err) {
@@ -15,6 +21,50 @@ router.get('/', async (req, res) => {
     console.error('Error fetching events:', err);
     res.status(500).json({
       error: 'Failed to fetch events'
+    });
+  }
+});
+
+// GET search events
+router.get('/search-events', async (req, res) => {
+  try {
+    // get query parameters from request
+    const { date, city, categoryId } = req.query;
+
+    // create sql
+    let sql = 'SELECT e.*, c.name AS category_name FROM events e JOIN categories c ON e.category_id = c.id';
+    const placeholderArr = [];
+
+    // date should between start date and end date
+    if (date) {
+      sql += ' AND ? BETWEEN DATE(e.start_at) AND DATE(e.end_at)';
+      placeholderArr.push(date);
+    }
+
+    // fuzzy query city keywords
+    if (city) {
+      sql += ' AND e.city LIKE ?';
+      placeholderArr.push(`%${city}%`);
+    }
+
+    if (categoryId) {
+      sql += ' AND e.category_id = ?';
+      placeholderArr.push(categoryId);
+    }
+
+    // order by start date
+    sql += ' ORDER BY e.start_at ASC';
+
+    // query event by search condition
+    const [rows] = await db.query(sql, placeholderArr);
+
+    // response events with json format
+    res.json(rows);
+  } catch (err) {
+    // response 500 status
+    console.error('Error searching events:', err);
+    res.status(500).json({
+      error: 'Failed to search events'
     });
   }
 });
